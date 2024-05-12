@@ -13,5 +13,8 @@ fun main() {
    val d = e + c; d.label = "d"
    val f = (-2).asValue("f")
    val outPut = d * f; outPut.label = "Out"
+
+   outPut.gradient = 1.0
+   outPut.propagateGradientsBackward()
    drawToSvg(outPut)
 }

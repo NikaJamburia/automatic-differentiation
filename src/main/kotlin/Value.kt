@@ -1,5 +1,7 @@
 package ge.nika
 
+import java.math.BigDecimal
+
 data class Value(
     val data: Double,
     private val parentOperation: ValueOperation?,
@@ -31,6 +33,10 @@ data class Value(
     }
 
     fun propagateGradientsBackward() {
+        if (parentOperation != null) {
+            parentOperation.assignGradients(this)
+            parents.forEach { it.propagateGradientsBackward() }
+        }
 
     }
 

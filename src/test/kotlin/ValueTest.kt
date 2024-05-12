@@ -36,4 +36,41 @@ class ValueTest {
             it.isCalculated shouldBe false
         }
     }
+
+    @Test
+    fun `backpropagates gradients correctly if the value structure is 1 node deep`() {
+        val a = 2.asValue()
+        val b = 6.asValue()
+        val result = a * b
+
+        result.gradient = 1.0
+        result.propagateGradientsBackward()
+
+        a.gradient shouldBe 6.0
+        b.gradient shouldBe 2.0
+        result.gradient shouldBe 1
+    }
+
+    @Test
+    fun `backpropagates correctly in case of deep structure`() {
+        val a = 2.asValue()
+        val b = (-3).asValue()
+        val c = 10.asValue()
+        val e = a * b
+        val d = e + c
+        val f = (-2).asValue()
+        val result = d * f
+
+        result.gradient = 1.0
+        result.propagateGradientsBackward()
+
+        result.gradient shouldBe 1.0
+
+        f.gradient shouldBe 4.0
+        d.gradient shouldBe -2.0
+        e.gradient shouldBe -2.0
+        c.gradient shouldBe -2.0
+        b.gradient shouldBe -4.0
+        a.gradient shouldBe 6.0
+    }
 }

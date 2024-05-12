@@ -61,9 +61,14 @@ private fun traceOperations(value: Value): List<Pair<Value, Node>> {
 
 }
 
-private fun getRecordsFor(value: Value): Attributes<ForNode> =
-    if (value.label != null) {
-        Records.of(rec(value.label!!), rec(value.data.toString()))
-    } else {
-        Records.of(rec("${value.data}"))
-    }
+private fun getRecordsFor(value: Value): Attributes<ForNode> {
+    val recs = buildList {
+        if (value.label != null) {
+            add(rec(value.label!!))
+        }
+        add(rec("data: ${value.data}"))
+        add(rec("grad: ${value.gradient}"))
+    }.toTypedArray()
+
+    return Records.of(*recs)
+}
