@@ -22,7 +22,8 @@ fun drawToSvg(
         node[Shape.RECORD]
     }
     val traced = traceOperations(value).toMap()
-    linkNodes(value, traced).forEach { graph.add(it) }
+    val linkedNodes = linkNodes(value, traced)
+    linkedNodes.forEach { graph.add(it) }
     println("Diagram generated! Writing to file")
 
     Graphviz
@@ -38,7 +39,7 @@ private fun linkNodes(value: Value, nodes: Map<Value, Node>): List<Node> {
     val node = nodes[value]!!
     return buildList {
         if (value.isCalculated) {
-            val operationNode = Factory.node(randomUUID().toString())
+            val operationNode = Factory.node(newUuid())
                 .with(Records.of(rec(value.parentOperationName)))
                 .with(Shape.CIRCLE)
             add(operationNode.link(node))
@@ -54,7 +55,9 @@ private fun linkNodes(value: Value, nodes: Map<Value, Node>): List<Node> {
 
 private fun traceOperations(value: Value): List<Pair<Value, Node>> {
     return buildList {
-        val node = Factory.node("${value.data}").with(Shape.RECORD).with(getRecordsFor(value))
+        val node = Factory.node(newUuid())
+            .with(Shape.RECORD)
+            .with(getRecordsFor(value))
         add(value to node)
         addAll(value.parents.flatMap { traceOperations(it) })
     }
@@ -72,3 +75,6 @@ private fun getRecordsFor(value: Value): Attributes<ForNode> {
 
     return Records.of(*recs)
 }
+
+private fun newUuid(): String =
+    randomUUID().toString()

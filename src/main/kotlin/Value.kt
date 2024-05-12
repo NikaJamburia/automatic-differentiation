@@ -1,6 +1,9 @@
 package ge.nika
 
-import java.math.BigDecimal
+import ge.nika.operations.Addition
+import ge.nika.operations.Multiplication
+import ge.nika.operations.ValueOperation
+
 
 data class Value(
     val data: Double,

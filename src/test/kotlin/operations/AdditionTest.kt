@@ -1,4 +1,6 @@
-import ge.nika.Addition
+package operations
+
+import ge.nika.operations.Addition
 import ge.nika.Value.Companion.asValue
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
