@@ -10,8 +10,8 @@ class Addition(
         get() = listOf(firstOperand, secondOperand)
 
     override fun assignGradients(operationResult: Value) {
-        firstOperand.gradient = operationResult.gradient
-        secondOperand.gradient = operationResult.gradient
+        firstOperand.gradient += operationResult.gradient
+        secondOperand.gradient += operationResult.gradient
     }
 
     override fun toString(): String = "+"

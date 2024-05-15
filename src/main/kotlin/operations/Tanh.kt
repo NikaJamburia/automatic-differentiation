@@ -21,7 +21,7 @@ class Tanh(
         get() = listOf(input)
 
     override fun assignGradients(operationResult: Value) {
-        input.gradient = (1 - operationResult.data.pow(2)) * operationResult.gradient
+        input.gradient += (1 - operationResult.data.pow(2)) * operationResult.gradient
     }
 
     override fun toString(): String  = "tanh"
