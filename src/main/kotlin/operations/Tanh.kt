@@ -2,6 +2,7 @@ package ge.nika.operations
 
 import ge.nika.Value
 import kotlin.math.exp
+import kotlin.math.pow
 
 class Tanh(
     private val input: Value
@@ -20,7 +21,7 @@ class Tanh(
         get() = listOf(input)
 
     override fun assignGradients(operationResult: Value) {
-        TODO("Not yet implemented")
+        input.gradient = (1 - operationResult.data.pow(2)) * operationResult.gradient
     }
 
     override fun toString(): String  = "tanh"

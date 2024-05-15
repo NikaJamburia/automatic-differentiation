@@ -5,6 +5,7 @@ import ge.nika.Value.Companion.asValue
 import ge.nika.operations.Tanh.Companion.tanh
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.math.round
 
 class TanhTest {
 
@@ -26,6 +27,16 @@ class TanhTest {
             result.parentOperationName shouldBe "tanh"
             result.parents shouldBe listOf(input)
         }
-
     }
+
+    @Test
+    fun `correctly assigns gradient`() {
+        val originalValue = 0.8813735801954321.asValue()
+        val tanhResult = originalValue.tanh()
+        tanhResult.gradient = 1.0
+        tanhResult.propagateGradientsBackward()
+
+        originalValue.gradient shouldBe 0.5000000048253751
+    }
+
 }

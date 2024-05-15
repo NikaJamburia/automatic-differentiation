@@ -38,7 +38,7 @@ data class Value(
     fun propagateGradientsBackward() {
         if (parentOperation != null) {
             parentOperation.assignGradients(this)
-            parents.forEach { it.propagateGradientsBackward() }
+            parentOperation.operands.forEach { it.propagateGradientsBackward() }
         }
 
     }

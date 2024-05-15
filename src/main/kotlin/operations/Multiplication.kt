@@ -6,6 +6,7 @@ class Multiplication(
     private val firstOperand: Value,
     private val secondOperand: Value,
 ): ValueOperation {
+
     override val operands: List<Value>
         get() = listOf(firstOperand, secondOperand)
 
@@ -13,7 +14,6 @@ class Multiplication(
         firstOperand.gradient = secondOperand.data * operationResult.gradient
         secondOperand.gradient = firstOperand.data * operationResult.gradient
     }
-
 
     override fun toString(): String = "*"
 }
