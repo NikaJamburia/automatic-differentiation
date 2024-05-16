@@ -1,4 +1,6 @@
 import ge.nika.Value.Companion.asValue
+import ge.nika.Value.Companion.sum
+import ge.nika.visualisation.drawToSvg
 import io.kotest.assertions.asClue
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -72,5 +74,17 @@ class ValueTest {
         c.gradient shouldBe -2.0
         b.gradient shouldBe -4.0
         a.gradient shouldBe 6.0
+    }
+
+    @Test
+    fun `list of values can correctly be summed`() {
+        val result = listOf(
+            1.asValue(),
+            2.asValue(),
+            3.asValue(),
+            4.asValue(),
+        ).sum()
+
+        result.data shouldBe 10
     }
 }

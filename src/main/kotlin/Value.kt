@@ -19,6 +19,8 @@ data class Value(
                 parentOperation = null,
                 label = label
             )
+
+        fun List<Value>.sum(): Value = fold(0.asValue()) { acc, value -> acc + value }
     }
 
     operator fun plus(other: Value): Value {
@@ -51,5 +53,8 @@ data class Value(
 
     val parentOperationName: String
         get() = parentOperation.toString()
+
+    override fun toString(): String = "Value($data)"
+
 
 }
