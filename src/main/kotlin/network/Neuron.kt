@@ -2,7 +2,6 @@ package ge.nika.network
 
 import ge.nika.Value
 import ge.nika.Value.Companion.asValue
-import ge.nika.Value.Companion.sum
 import ge.nika.operations.Tanh.Companion.tanh
 import kotlin.random.Random
 

@@ -19,8 +19,6 @@ data class Value(
                 parentOperation = null,
                 label = label
             )
-
-        fun List<Value>.sum(): Value = fold(0.asValue()) { acc, value -> acc + value }
     }
 
     operator fun plus(other: Value): Value {
@@ -36,6 +34,10 @@ data class Value(
             parentOperation = Multiplication(this, other)
         )
     }
+
+    operator fun minus(other: Value): Value = this + (-other)
+
+    operator fun unaryMinus(): Value = this * (-1).asValue()
 
     fun propagateGradientsBackward() {
         if (parentOperation != null) {
@@ -55,6 +57,5 @@ data class Value(
         get() = parentOperation.toString()
 
     override fun toString(): String = "Value($data)"
-
 
 }

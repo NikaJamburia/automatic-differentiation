@@ -1,11 +1,17 @@
 package ge.nika.operations
 
 import ge.nika.Value
+import ge.nika.Value.Companion.asValue
 
 class Multiplication(
     private val firstOperand: Value,
     private val secondOperand: Value,
 ): ValueOperation {
+
+    companion object {
+        fun Value.squared(): Value =
+            this * this.data.asValue()
+    }
 
     override val operands: List<Value>
         get() = listOf(firstOperand, secondOperand)

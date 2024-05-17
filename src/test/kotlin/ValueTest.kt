@@ -1,6 +1,6 @@
 import ge.nika.Value.Companion.asValue
-import ge.nika.Value.Companion.sum
-import ge.nika.visualisation.drawToSvg
+import ge.nika.network.sum
+import ge.nika.operations.Multiplication.Companion.squared
 import io.kotest.assertions.asClue
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -86,5 +86,55 @@ class ValueTest {
         ).sum()
 
         result.data shouldBe 10
+    }
+
+    @Test
+    fun `can be negated by multiplying itself by -1`() {
+        val value = 2.asValue()
+        val result = -value
+
+        result.asClue {
+            it.data shouldBe -2.0
+            it.isCalculated shouldBe true
+            it.parentOperationName shouldBe "*"
+            it.parents[0] shouldBe value
+            it.parents[1] shouldBe (-1).asValue()
+        }
+    }
+
+    @Test
+    fun `values can be subtracted from each other`() {
+        val value1 = 3.asValue()
+        val value2 = 5.asValue()
+
+        val result = value1 - value2
+
+        result.asClue {
+            result.data shouldBe -2.0
+            it.isCalculated shouldBe true
+            it.parentOperationName shouldBe "+"
+            it.parents[0] shouldBe value1
+            it.parents[1].asClue { negatedOperand ->
+                negatedOperand.data shouldBe -5.0
+                negatedOperand.isCalculated shouldBe true
+                negatedOperand.parentOperationName shouldBe "*"
+                negatedOperand.parents[0] shouldBe value2
+                negatedOperand.parents[1] shouldBe (-1).asValue()
+            }
+        }
+    }
+
+    @Test
+    fun `value can be squared`() {
+        val value = 2.asValue()
+        val result = value.squared()
+
+        result.asClue {
+            result.data shouldBe 4.0
+            result.isCalculated shouldBe true
+            result.parentOperationName shouldBe "*"
+            result.parents[0] shouldBe value
+            result.parents[1] shouldBe value
+        }
     }
 }
