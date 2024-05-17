@@ -24,7 +24,7 @@ class NeuronTest {
         val neuron = Neuron(2)
 
         shouldThrow<IllegalArgumentException> {
-            neuron.call(listOf(1.asValue()))
+            neuron.forwardPass(listOf(1.asValue()))
         }.message shouldBe "Number of given inputs must equal predefined number!"
     }
 
@@ -40,7 +40,7 @@ class NeuronTest {
             bias = 1.asValue()
         )
 
-        val result = neuron.call(
+        val result = neuron.forwardPass(
             listOf(
                 2.asValue(),
                 (-3).asValue(),

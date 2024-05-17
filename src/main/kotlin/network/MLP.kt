@@ -18,9 +18,14 @@ class MLP(
          }
      }
 
-    fun call(inputs: List<Value>): List<Value> {
+    fun forwardPass(inputs: List<Value>): List<Value> {
         return layers.fold(inputs) { previousLayerOutputs, layer ->
-            layer.call(previousLayerOutputs)
+            layer.forwardPass(previousLayerOutputs)
+        }.map {
+            it.label = "FWD pass result"
+            it
         }
     }
+
+    fun adjustParameters(learningRate: Double) = layers.forEach { it.adjustParameters(learningRate) }
 }

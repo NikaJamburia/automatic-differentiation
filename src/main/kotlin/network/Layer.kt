@@ -11,8 +11,10 @@ class Layer(
         Neuron(numberOfInputs = numberOfInputsInNeuron)
     }
 
-    fun call(inputs: List<Value>): List<Value> {
+    fun forwardPass(inputs: List<Value>): List<Value> {
         require(inputs.size == numberOfInputsInNeuron)
-        return neurons.map { it.call(inputs) }
+        return neurons.map { it.forwardPass(inputs) }
     }
+
+    fun adjustParameters(learningRate: Double) = neurons.forEach { it.adjustParameters(learningRate) }
 }

@@ -3,6 +3,7 @@ package ge.nika.network
 import ge.nika.Value
 import ge.nika.Value.Companion.asValue
 import ge.nika.operations.Tanh.Companion.tanh
+import kotlin.math.absoluteValue
 import kotlin.random.Random
 
 class Neuron(
@@ -17,11 +18,11 @@ class Neuron(
         }
     }
 
-    private val weights: List<Value> = weights
-        ?: (1..numberOfInputs).map { randomValue(-1.0, 1.0) }
-    private val bias: Value = bias ?: randomValue(-1.0, 1.0)
+    private var weights: List<Value> = weights
+        ?: (1..numberOfInputs).map { randomValue(-1.0, 1.0, "WEIGHT") }
+    private var bias: Value = bias ?: randomValue(-1.0, 1.0, "BIAS")
 
-    fun call(inputs: List<Value>): Value {
+    fun forwardPass(inputs: List<Value>): Value {
         require(inputs.size == numberOfInputs) {
             "Number of given inputs must equal predefined number!"
         }
@@ -33,5 +34,25 @@ class Neuron(
         return activation.tanh()
     }
 
-    private fun randomValue(from: Double, to: Double): Value = Random.nextDouble(from,to).asValue()
+    fun adjustParameters(learningRate: Double) {
+        val newWeights = weights.map {
+            it.adjustToDecreaseLoss(learningRate)
+        }
+        val newBias = bias.adjustToDecreaseLoss(learningRate)
+
+        weights = newWeights
+        bias = newBias
+    }
+
+    private fun Value.adjustToDecreaseLoss(learningRate: Double): Value {
+        val negRate = -(learningRate.absoluteValue)
+        return (data + (negRate * gradient)).asValue(label)
+    }
+
+
+    private fun randomValue(
+        from: Double,
+        to: Double,
+        label: String? = null
+    ): Value = Random.nextDouble(from,to).asValue(label)
 }
