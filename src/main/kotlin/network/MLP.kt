@@ -1,8 +1,10 @@
 package ge.nika.network
 
 import ge.nika.Value
+import ge.nika.operations.ActivationFunction
 
 class MLP(
+    private val activationFunction: ActivationFunction = ActivationFunction.Tanh,
     private val numberOfOriginalInputs: Int,
     layerSizes: List<Int>,
 ) {
@@ -12,7 +14,8 @@ class MLP(
              add(
                  Layer(
                      numberOfInputsInNeuron = lastLayerSize,
-                     numberOfNeurons = it
+                     numberOfNeurons = it,
+                     activationFunction = activationFunction
                  )
              )
          }

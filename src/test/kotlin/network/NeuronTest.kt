@@ -2,6 +2,7 @@ package network
 
 import ge.nika.Value.Companion.asValue
 import ge.nika.network.Neuron
+import ge.nika.operations.ActivationFunction
 import ge.nika.operations.Tanh.Companion.tanh
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
@@ -14,14 +15,18 @@ class NeuronTest {
         shouldThrow<IllegalArgumentException> {
             Neuron(
                 numberOfInputs = 2,
-                weights = listOf(1.asValue())
+                weights = listOf(1.asValue()),
+                activationFunction = ActivationFunction.Tanh,
             )
-        }.message shouldBe "Number of given weights must equal numer of inputs!"
+        }.message shouldBe "Number of given weights must equal number of inputs!"
     }
 
     @Test
     fun `can not be called with different number of inputs`() {
-        val neuron = Neuron(2)
+        val neuron = Neuron(
+            numberOfInputs = 2,
+            activationFunction = ActivationFunction.Tanh,
+        )
 
         shouldThrow<IllegalArgumentException> {
             neuron.forwardPass(listOf(1.asValue()))
@@ -37,7 +42,8 @@ class NeuronTest {
                 3.asValue(),
                 5.asValue(),
             ),
-            bias = 1.asValue()
+            bias = 1.asValue(),
+            activationFunction = ActivationFunction.Tanh,
         )
 
         val result = neuron.forwardPass(

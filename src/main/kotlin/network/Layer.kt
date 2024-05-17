@@ -1,14 +1,19 @@
 package ge.nika.network
 
 import ge.nika.Value
+import ge.nika.operations.ActivationFunction
 
 class Layer(
     val numberOfInputsInNeuron: Int,
     val numberOfNeurons: Int,
+    private val activationFunction: ActivationFunction,
 ) {
 
     private val neurons = (1..numberOfNeurons).map {
-        Neuron(numberOfInputs = numberOfInputsInNeuron)
+        Neuron(
+            numberOfInputs = numberOfInputsInNeuron,
+            activationFunction = activationFunction,
+        )
     }
 
     fun forwardPass(inputs: List<Value>): List<Value> {
