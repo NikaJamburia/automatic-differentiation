@@ -45,7 +45,7 @@ class ValueTest {
         val b = 6.asValue()
         val result = a * b
 
-        result.gradient = 1.0
+        result.incrementGradientBy(1.0)
         result.propagateGradientsBackward()
 
         a.gradient shouldBe 6.0
@@ -63,7 +63,7 @@ class ValueTest {
         val f = (-2).asValue()
         val result = d * f
 
-        result.gradient = 1.0
+        result.incrementGradientBy(1.0)
         result.propagateGradientsBackward()
 
         result.gradient shouldBe 1.0

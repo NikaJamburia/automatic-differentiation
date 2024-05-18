@@ -8,9 +8,11 @@ import ge.nika.operations.ValueOperation
 data class Value(
     val data: Double,
     private val parentOperation: ValueOperation?,
-    var gradient: Double = 0.0,
     var label: String? = null
 ) {
+
+    var gradient: Double = 0.0
+        private set
 
     companion object {
         fun Number.asValue(label: String? = null): Value =
@@ -44,7 +46,11 @@ data class Value(
             parentOperation.assignGradients(this)
             parentOperation.operands.forEach { it.propagateGradientsBackward() }
         }
+    }
 
+    fun incrementGradientBy(double: Double): Double {
+        gradient += double
+        return gradient
     }
 
     val isCalculated: Boolean

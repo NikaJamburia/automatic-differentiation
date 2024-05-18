@@ -33,7 +33,7 @@ class TanhTest {
     fun `correctly assigns gradient`() {
         val originalValue = 0.8813735801954321.asValue()
         val tanhResult = originalValue.tanh()
-        tanhResult.gradient = 1.0
+        tanhResult.incrementGradientBy(1.0)
         tanhResult.propagateGradientsBackward()
 
         originalValue.gradient shouldBe 0.5000000048253751

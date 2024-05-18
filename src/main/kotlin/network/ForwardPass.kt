@@ -13,7 +13,7 @@ fun MLP.performForwardPasses(
         loss(target, prediction)
     }.sum()
 
-    loss.gradient = 1.0
+    loss.incrementGradientBy(1.0)
     loss.propagateGradientsBackward()
 
     return ForwardPassResult(

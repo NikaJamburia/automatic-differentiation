@@ -11,7 +11,7 @@ class MultiplicationTest {
     fun `assigns gradients to the operands of multiplication if result is a forward pas root(grad = 1)`() {
         val value1 = 5.0.asValue()
         val value2 = 3.0.asValue()
-        val result = 15.0.asValue(); result.gradient = 1.0
+        val result = 15.0.asValue(); result.incrementGradientBy(1.0)
 
         val multiplication = Multiplication(value1, value2)
         multiplication.assignGradients(result)
@@ -24,7 +24,7 @@ class MultiplicationTest {
     fun `assigns gradients to the operands and applies chain rule if result has its own gradient`() {
         val value1 = 5.0.asValue()
         val value2 = 3.0.asValue()
-        val result = 15.0.asValue(); result.gradient = 0.5
+        val result = 15.0.asValue(); result.incrementGradientBy(0.5)
 
         val multiplication = Multiplication(value1, value2)
         multiplication.assignGradients(result)

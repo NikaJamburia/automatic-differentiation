@@ -11,7 +11,7 @@ class AdditionTest {
     fun `assigns 1 as gradient to the operands of addition if result is a forward pas root(grad = 1)`() {
         val value1 = 5.0.asValue()
         val value2 = 3.0.asValue()
-        val result = 8.0.asValue(); result.gradient = 1.0
+        val result = 8.0.asValue(); result.incrementGradientBy(1.0)
 
         val addition = Addition(value1, value2)
         addition.assignGradients(result)
@@ -24,7 +24,7 @@ class AdditionTest {
     fun `assigns 1 as gradient to the operands and applies chain rule if result has its own gradient`() {
         val value1 = 5.0.asValue()
         val value2 = 3.0.asValue()
-        val result = 8.0.asValue(); result.gradient = 0.2
+        val result = 8.0.asValue(); result.incrementGradientBy(0.2)
 
         val addition = Addition(value1, value2)
         addition.assignGradients(result)

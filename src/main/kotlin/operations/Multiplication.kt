@@ -17,8 +17,8 @@ class Multiplication(
         get() = listOf(firstOperand, secondOperand)
 
     override fun assignGradients(operationResult: Value) {
-        firstOperand.gradient += secondOperand.data * operationResult.gradient
-        secondOperand.gradient += firstOperand.data * operationResult.gradient
+        firstOperand.incrementGradientBy(secondOperand.data * operationResult.gradient)
+        secondOperand.incrementGradientBy(firstOperand.data * operationResult.gradient)
     }
 
     override fun toString(): String = "*"
