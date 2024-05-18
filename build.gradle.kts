@@ -6,6 +6,7 @@ group = "ge.nika"
 version = "1.0-SNAPSHOT"
 
 val kotlinDLVersion by extra { "0.5.2" }
+val jupiterVersion by extra { "5.6.3" }
 
 
 repositories {
@@ -20,6 +21,7 @@ dependencies {
 
 
     testImplementation("io.kotest:kotest-assertions-core:5.9.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$jupiterVersion")
     testImplementation(kotlin("test"))
 }
 

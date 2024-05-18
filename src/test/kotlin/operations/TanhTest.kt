@@ -1,32 +1,30 @@
 package operations
 
-import ge.nika.Value
 import ge.nika.Value.Companion.asValue
 import ge.nika.operations.Tanh.Companion.tanh
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import kotlin.math.round
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class TanhTest {
 
-    @Test
-    fun `tanh of a given value is correctly calculated`() {
-        val inputsAndOutputs: Map<Value, Double> = mapOf(
-            2.asValue() to 0.9640275800758169,
-            30.asValue() to 1.0,
-            4.asValue() to 0.999329299739067,
-            (-14).asValue() to -0.9999999999986171,
-            (-2).asValue() to -0.9640275800758168,
-        )
+    @ParameterizedTest
+    @CsvSource(
+        "2.0,    0.9640275800758169",
+        "30.0,   1.0",
+        "4.0,    0.999329299739067",
+        "-14.0, -0.9999999999986171",
+        "-2.0,  -0.9640275800758168",
+    )
+    fun `tanh of a given value is correctly calculated`(input: Double, output: Double) {
+        val inputValue = input.asValue()
+        val result = inputValue.tanh()
 
-        inputsAndOutputs.forEach { (input, output) ->
-            val result = input.tanh()
-            println(input)
-            result.data shouldBe output
-            result.isCalculated shouldBe true
-            result.parentOperationName shouldBe "tanh"
-            result.parents shouldBe listOf(input)
-        }
+        result.data shouldBe output
+        result.isCalculated shouldBe true
+        result.parentOperationName shouldBe "tanh"
+        result.parents shouldBe listOf(inputValue)
     }
 
     @Test
