@@ -42,3 +42,5 @@ bin/
 .DS_Store
 
 /cache/
+/diagrams/
+/lets-plot-images/

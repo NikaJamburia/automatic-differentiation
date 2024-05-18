@@ -16,10 +16,8 @@ repositories {
 dependencies {
     implementation("guru.nidi:graphviz-kotlin:0.18.1")
     implementation("com.eclipsesource.j2v8:j2v8_win32_x86_64:4.6.0")
-
     implementation("org.jetbrains.kotlinx:kotlin-deeplearning-dataset:$kotlinDLVersion")
-
-
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.11.0")
     testImplementation("io.kotest:kotest-assertions-core:5.9.0")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$jupiterVersion")
     testImplementation(kotlin("test"))
