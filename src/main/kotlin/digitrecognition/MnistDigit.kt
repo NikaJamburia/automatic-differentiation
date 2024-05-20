@@ -11,7 +11,7 @@ data class MnistDigit(
 ) {
     companion object {
         fun randomFrom(datasetType: MnistDatasetType): MnistDigit {
-            val dataSet = MnistDataset.getDataset(datasetType)
+            val dataSet = MnistDigitsDataset.getDataset(datasetType)
             val randomIndex = Random.nextInt(0, dataSet.x.size-1)
             return  MnistDigit(
                 pixels = dataSet.x[randomIndex],

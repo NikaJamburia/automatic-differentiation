@@ -3,7 +3,7 @@ package ge.nika.digitrecognition
 import org.jetbrains.kotlinx.dl.dataset.OnHeapDataset
 import org.jetbrains.kotlinx.dl.dataset.embedded.mnist
 
-object MnistDataset {
+object MnistDigitsDataset {
     private val mnist = mnist()
     val train: OnHeapDataset = mnist.first
     val test: OnHeapDataset = mnist.second
