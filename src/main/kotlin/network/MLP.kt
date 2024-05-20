@@ -24,9 +24,6 @@ class MLP(
     fun forwardPass(inputs: List<Value>): List<Value> {
         return layers.fold(inputs) { previousLayerOutputs, layer ->
             layer.forwardPass(previousLayerOutputs)
-        }.map {
-            it.label = "FWD pass result"
-            it
         }
     }
 

@@ -1,5 +1,7 @@
 package ge.nika.digitrecognition
 
+import ge.nika.Value
+import ge.nika.Value.Companion.asValue
 import kotlinx.html.*
 import kotlinx.html.stream.appendHTML
 import java.io.StringWriter
@@ -18,21 +20,6 @@ data class MnistDigit(
                 label = dataSet.y[randomIndex]
             )
         }
-    }
-
-    fun pixelMatrix(): List<List<Float>> {
-        val outerList = buildMap<Int, MutableList<Float>> {
-            repeat(28) {
-                put(it, mutableListOf())
-            }
-        }
-
-        pixels.forEachIndexed { index, pixelValue ->
-            val rowNumber: Int = if (index == 0) { 0 } else { index/28 }
-            outerList[rowNumber]?.add(pixelValue)
-        }
-
-        return outerList.values.map { it.toList() }
     }
 
     fun toHtml(): String {
@@ -59,5 +46,16 @@ data class MnistDigit(
             }
         }
         return writer.toString()
+    }
+
+    fun toTrainingParams(): MnistTrainingParams = MnistTrainingParams(
+        inputLayer = pixels.map { it.toDouble().asValue() },
+        expectedOutput = createOutputLayer(),
+    )
+
+    private fun createOutputLayer(): List<Value> {
+        val zeroList = mutableListOf(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+        zeroList[label.toInt()] = 1.0
+        return zeroList.map { it.asValue() }
     }
 }
