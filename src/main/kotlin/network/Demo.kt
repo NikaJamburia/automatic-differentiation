@@ -2,6 +2,7 @@ package ge.nika.network
 
 import ge.nika.Value.Companion.asValue
 import ge.nika.network.ForwardPassParams.Companion.withTarget
+import ge.nika.operations.ActivationFunction
 
 /**
  * This object is a small demonstration of the MLP capabilities. It iterates 100 times with fixed learning rate
@@ -9,9 +10,10 @@ import ge.nika.network.ForwardPassParams.Companion.withTarget
 object Demo {
 
     fun run() {
-        val mlp = MLP(
+        val mlp = MLP.generate(
+            activationFunction = ActivationFunction.Tanh,
             numberOfOriginalInputs = 3,
-            layerSizes = listOf(4, 4, 1)
+            layerSizes = listOf(4, 4, 1),
         )
 
         val inputs: List<ForwardPassParams> =

@@ -37,7 +37,7 @@ class MnistDigitTest {
 
         val result = subject.toTrainingParams()
 
-        result.expectedOutput shouldBe expectedList.map { it.asValue() }
+        result.expectedOutput.neuronValues shouldBe expectedList.map { it.asValue() }
     }
 
     private fun outputLayerTestSourceData(): List<Arguments> {

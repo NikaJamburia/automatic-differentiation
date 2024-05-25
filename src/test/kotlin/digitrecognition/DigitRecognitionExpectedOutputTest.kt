@@ -1,7 +1,7 @@
 package digitrecognition
 
 import ge.nika.Value.Companion.asValue
-import ge.nika.digitrecognition.params.DigitRecognitionExpectedOutput
+import digitrecognition.io.DigitRecognitionExpectedOutput
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
@@ -49,16 +49,16 @@ class DigitRecognitionExpectedOutputTest {
     @Test
     fun `of static method only accepts numbers from 0 to 9`() {
         shouldThrow<IllegalArgumentException> {
-            DigitRecognitionExpectedOutput.of(-1)
+            DigitRecognitionExpectedOutput.ofFloat(-1f)
         }.message shouldBe "DigitRecognitionExpectedOutput can only be between 0 and 9"
 
         shouldThrow<IllegalArgumentException> {
-            DigitRecognitionExpectedOutput.of(10)
+            DigitRecognitionExpectedOutput.ofFloat(10f)
         }.message shouldBe "DigitRecognitionExpectedOutput can only be between 0 and 9"
 
         (0..9).forEach {
             shouldNotThrow<Exception> {
-                DigitRecognitionExpectedOutput.of(it)
+                DigitRecognitionExpectedOutput.ofFloat(it.toFloat())
             }
         }
     }

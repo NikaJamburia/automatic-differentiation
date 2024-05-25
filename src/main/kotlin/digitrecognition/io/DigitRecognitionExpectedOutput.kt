@@ -1,4 +1,4 @@
-package ge.nika.digitrecognition.params
+package digitrecognition.io
 
 import ge.nika.Value
 import ge.nika.Value.Companion.asValue
@@ -7,8 +7,8 @@ data class DigitRecognitionExpectedOutput(
     val neuronValues: List<Value>
 ) {
     companion object {
-        fun of(number: Number): DigitRecognitionExpectedOutput {
-            require(number in 0..9) {
+        fun ofFloat(number: Float): DigitRecognitionExpectedOutput {
+            require(number in 0f..9f) {
                 "DigitRecognitionExpectedOutput can only be between 0 and 9"
             }
 

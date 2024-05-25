@@ -1,4 +1,4 @@
-package ge.nika.digitrecognition.params
+package digitrecognition.io
 
 import ge.nika.Value
 

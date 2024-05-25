@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 class MLPTest {
     @Test
     fun `correctly assigns number of inputs and neurons to each layer`() {
-        val mlp = MLP(
+        val mlp = MLP.generate(
             numberOfOriginalInputs = 3,
             layerSizes = listOf(5, 5, 1)
         )

@@ -13,9 +13,10 @@ class NeuronTest {
     @Test
     fun `cant be initialized with different numbers of inputs and weights`() {
         shouldThrow<IllegalArgumentException> {
-            Neuron(
+            Neuron.withPredefinedWeights(
                 numberOfInputs = 2,
                 weights = listOf(1.asValue()),
+                bias = 1.asValue(),
                 activationFunction = ActivationFunction.Tanh,
             )
         }.message shouldBe "Number of given weights must equal number of inputs!"
@@ -23,7 +24,7 @@ class NeuronTest {
 
     @Test
     fun `can not be called with different number of inputs`() {
-        val neuron = Neuron(
+        val neuron = Neuron.withRandomWeights(
             numberOfInputs = 2,
             activationFunction = ActivationFunction.Tanh,
         )
@@ -35,7 +36,7 @@ class NeuronTest {
 
     @Test
     fun `correctly calculates the output by returning a tanh of activation`() {
-        val neuron = Neuron(
+        val neuron = Neuron.withPredefinedWeights(
             numberOfInputs = 3,
             weights = listOf(
                 2.asValue(),

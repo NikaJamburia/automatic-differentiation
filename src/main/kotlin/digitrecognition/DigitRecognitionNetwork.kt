@@ -5,7 +5,7 @@ import ge.nika.network.MLP
 import ge.nika.operations.ActivationFunction
 
 class DigitRecognitionNetwork(
-    private val mlp: MLP = MLP(
+    private val mlp: MLP = MLP.generate(
         activationFunction = ActivationFunction.Sigmoid,
         numberOfOriginalInputs = 758,
         layerSizes = listOf(15, 10)

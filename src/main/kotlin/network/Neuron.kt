@@ -7,22 +7,47 @@ import ge.nika.operations.Tanh.Companion.tanh
 import kotlin.math.absoluteValue
 import kotlin.random.Random
 
-class Neuron(
-    private val numberOfInputs: Int,
-    private val activationFunction: ActivationFunction,
-    weights: List<Value>? = null,
-    bias: Value? = null,
+class Neuron private constructor(
+    val numberOfInputs: Int,
+    val activationFunction: ActivationFunction,
+    weights: List<Value>,
+    bias: Value,
 ) {
 
+    companion object {
+        fun withRandomWeights(
+            numberOfInputs: Int,
+            activationFunction: ActivationFunction,
+        ): Neuron = Neuron(
+            numberOfInputs = numberOfInputs,
+            activationFunction = activationFunction,
+            weights = (1..numberOfInputs).map { randomValue(-1.0, 1.0, "WEIGHT") },
+            bias = randomValue(-1.0, 1.0, "BIAS")
+        )
+
+        fun withPredefinedWeights(
+            numberOfInputs: Int,
+            activationFunction: ActivationFunction,
+            weights: List<Value>,
+            bias: Value,
+        ): Neuron = Neuron(
+            numberOfInputs = numberOfInputs,
+            activationFunction = activationFunction,
+            weights = weights,
+            bias = bias
+        )
+    }
+
     init {
-        require((weights?.size ?: numberOfInputs) == numberOfInputs) {
+        require(weights.size == numberOfInputs) {
             "Number of given weights must equal number of inputs!"
         }
     }
 
-    private var weights: List<Value> = weights
-        ?: (1..numberOfInputs).map { randomValue(-1.0, 1.0, "WEIGHT") }
-    private var bias: Value = bias ?: randomValue(-1.0, 1.0, "BIAS")
+    var weights: List<Value> = weights
+        private set
+    var bias: Value = bias
+        private set
 
     fun forwardPass(inputs: List<Value>): Value {
         require(inputs.size == numberOfInputs) {
@@ -49,11 +74,10 @@ class Neuron(
         val negRate = -(learningRate.absoluteValue)
         return (data + (negRate * gradient)).asValue(label)
     }
-
-
-    private fun randomValue(
-        from: Double,
-        to: Double,
-        label: String? = null
-    ): Value = Random.nextDouble(from,to).asValue(label)
 }
+
+fun randomValue(
+    from: Double,
+    to: Double,
+    label: String? = null
+): Value = Random.nextDouble(from,to).asValue(label)
