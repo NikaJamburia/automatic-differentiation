@@ -1,6 +1,5 @@
 package ge.nika.digitrecognition
 
-import ge.nika.Value
 import ge.nika.Value.Companion.asValue
 import kotlinx.html.*
 import kotlinx.html.stream.appendHTML
@@ -48,14 +47,8 @@ data class MnistDigit(
         return writer.toString()
     }
 
-    fun toTrainingParams(): MnistTrainingParams = MnistTrainingParams(
+    fun toTrainingParams(): DigitRecognitionTrainingParams = DigitRecognitionTrainingParams(
         inputLayer = pixels.map { it.toDouble().asValue() },
-        expectedOutput = createOutputLayer(),
+        expectedOutput = DigitRecognitionExpectedOutput.of(label),
     )
-
-    private fun createOutputLayer(): List<Value> {
-        val zeroList = mutableListOf(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-        zeroList[label.toInt()] = 1.0
-        return zeroList.map { it.asValue() }
-    }
 }

@@ -29,7 +29,7 @@ class MnistDigitTest {
 
     @ParameterizedTest
     @MethodSource("outputLayerTestSourceData")
-    fun `converts label to the array of neurons activations`(label: Float, expectedList: List<Double>) {
+    fun `converts label to the array of neuron activations`(label: Float, expectedList: List<Double>) {
         val subject = MnistDigit(
             pixels = floatArrayOf(0.25f, 0.454f, 0.9965f),
             label = label,

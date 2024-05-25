@@ -7,8 +7,8 @@ import org.jetbrains.kotlinx.dl.dataset.embedded.fashionMnist
 
 fun main() {
 
-//    val digit = MnistDigit.randomFrom(MnistDatasetType.TRAIN)
-//    println(digit.toHtml())
+    val digit = MnistDigit.randomFrom(MnistDatasetType.TRAIN)
+    println(digit.toHtml())
 
-    MnistBrowserServer().start()
+//    MnistBrowserServer().start()
 }
