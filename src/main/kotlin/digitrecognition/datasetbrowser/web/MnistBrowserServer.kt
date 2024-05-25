@@ -1,6 +1,6 @@
 package ge.nika.digitrecognition.datasetbrowser.web
 
-import ge.nika.digitrecognition.MnistDatasetType
+import ge.nika.digitrecognition.data.MnistDatasetType
 import ge.nika.digitrecognition.datasetbrowser.MnistBrowserService
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

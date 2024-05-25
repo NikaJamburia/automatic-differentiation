@@ -1,4 +1,4 @@
-package ge.nika.digitrecognition
+package ge.nika.digitrecognition.data
 
 import org.jetbrains.kotlinx.dl.dataset.OnHeapDataset
 import org.jetbrains.kotlinx.dl.dataset.embedded.mnist

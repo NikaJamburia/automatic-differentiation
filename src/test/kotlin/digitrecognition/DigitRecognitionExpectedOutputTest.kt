@@ -1,7 +1,7 @@
 package digitrecognition
 
 import ge.nika.Value.Companion.asValue
-import ge.nika.digitrecognition.DigitRecognitionExpectedOutput
+import ge.nika.digitrecognition.params.DigitRecognitionExpectedOutput
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe

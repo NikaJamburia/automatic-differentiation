@@ -1,9 +1,7 @@
 package ge.nika
 
-import ge.nika.digitrecognition.MnistDatasetType
-import ge.nika.digitrecognition.MnistDigit
-import ge.nika.digitrecognition.datasetbrowser.web.MnistBrowserServer
-import org.jetbrains.kotlinx.dl.dataset.embedded.fashionMnist
+import ge.nika.digitrecognition.data.MnistDatasetType
+import ge.nika.digitrecognition.data.MnistDigit
 
 fun main() {
 

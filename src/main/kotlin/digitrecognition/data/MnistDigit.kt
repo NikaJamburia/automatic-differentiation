@@ -1,6 +1,8 @@
-package ge.nika.digitrecognition
+package ge.nika.digitrecognition.data
 
 import ge.nika.Value.Companion.asValue
+import ge.nika.digitrecognition.params.DigitRecognitionExpectedOutput
+import ge.nika.digitrecognition.params.DigitRecognitionTrainingParams
 import kotlinx.html.*
 import kotlinx.html.stream.appendHTML
 import java.io.StringWriter

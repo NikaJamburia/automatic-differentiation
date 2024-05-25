@@ -1,5 +1,6 @@
 package ge.nika.digitrecognition
 
+import ge.nika.digitrecognition.data.MnistDigit
 import ge.nika.network.MLP
 import ge.nika.operations.ActivationFunction
 

@@ -1,4 +1,4 @@
-package ge.nika.digitrecognition
+package ge.nika.digitrecognition.params
 
 import ge.nika.Value
 import ge.nika.Value.Companion.asValue

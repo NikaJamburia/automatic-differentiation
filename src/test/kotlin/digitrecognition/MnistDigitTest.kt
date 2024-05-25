@@ -1,7 +1,7 @@
 package digitrecognition
 
 import ge.nika.Value.Companion.asValue
-import ge.nika.digitrecognition.MnistDigit
+import ge.nika.digitrecognition.data.MnistDigit
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
