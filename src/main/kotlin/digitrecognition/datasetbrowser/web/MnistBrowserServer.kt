@@ -2,6 +2,8 @@ package ge.nika.digitrecognition.datasetbrowser.web
 
 import ge.nika.digitrecognition.data.MnistDatasetType
 import ge.nika.digitrecognition.datasetbrowser.MnistBrowserService
+import ge.nika.digitrecognition.datasetbrowser.web.dto.GuessDigitRequest
+import ge.nika.digitrecognition.datasetbrowser.web.dto.toWebDto
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.http4k.core.*
@@ -14,15 +16,15 @@ import org.http4k.routing.routes
 import org.http4k.server.Netty
 import org.http4k.server.asServer
 
-class MnistBrowserServer {
-
-    private val service = MnistBrowserService()
+class MnistBrowserServer(
+    private val service: MnistBrowserService
+) {
 
     fun start() {
         val http = DebuggingFilters.PrintRequest()
             .then(ServerFilters.Cors(UnsafeGlobalPermissive))
             .then(routes(
-                "digits/{datesetType}/random" bind Method.GET to { req ->
+                "/digits/{datesetType}/random" bind Method.GET to { req ->
 
                     val datesetType = req.path("datesetType")
                         ?.let { MnistDatasetType.valueOf(it) }
@@ -32,6 +34,16 @@ class MnistBrowserServer {
                     Response(Status.OK)
                         .header("content-type", "application/json")
                         .body(digit.toJson())
+                },
+                "/digits/guess" bind Method.POST to { req ->
+
+                    val requestBody = Json.decodeFromString<GuessDigitRequest>(req.bodyString())
+
+                    val response = service.guessDigit(requestBody)
+
+                    Response(Status.OK)
+                        .header("content-type", "application/json")
+                        .body(response.toJson())
                 }
             ))
 
