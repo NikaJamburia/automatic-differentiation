@@ -1,4 +1,4 @@
-package ge.nika.digitrecognition.datasetbrowser.web
+package ge.nika.digitrecognition.datasetbrowser.web.dto
 
 import ge.nika.digitrecognition.data.MnistDigit
 import kotlinx.serialization.Serializable

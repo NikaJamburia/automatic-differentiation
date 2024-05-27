@@ -20,6 +20,8 @@ dependencies {
     implementation("com.eclipsesource.j2v8:j2v8_win32_x86_64:4.6.0")
     implementation("org.jetbrains.kotlinx:kotlin-deeplearning-dataset:$kotlinDLVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.11.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+
 
     implementation ("org.http4k:http4k-client-okhttp:$http4kVersion")
     implementation ("org.http4k:http4k-core:$http4kVersion")
