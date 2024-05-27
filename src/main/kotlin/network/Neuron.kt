@@ -21,8 +21,8 @@ class Neuron private constructor(
         ): Neuron = Neuron(
             numberOfInputs = numberOfInputs,
             activationFunction = activationFunction,
-            weights = (1..numberOfInputs).map { randomValue(-1.0, 1.0, "WEIGHT") },
-            bias = randomValue(-1.0, 1.0, "BIAS")
+            weights = (1..numberOfInputs).map { randomValue(0.0, 1.0, "WEIGHT") },
+            bias = randomValue(0.0, 1.0, "BIAS")
         )
 
         fun withPredefinedWeights(
