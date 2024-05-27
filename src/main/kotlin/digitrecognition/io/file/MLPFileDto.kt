@@ -2,7 +2,9 @@ package ge.nika.digitrecognition.io.file
 
 import ge.nika.digitrecognition.io.file.LayerFileDto.Companion.toFileDto
 import ge.nika.network.MLP
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class MLPFileDto(
     val layerDtos: List<LayerFileDto>
 ) {

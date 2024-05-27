@@ -1,8 +1,11 @@
 package ge.nika.digitrecognition
 
 import ge.nika.digitrecognition.data.MnistDigit
+import ge.nika.digitrecognition.io.file.loadMlpFromFile
+import ge.nika.digitrecognition.io.file.saveToFile
 import ge.nika.network.MLP
 import ge.nika.operations.ActivationFunction
+import java.time.Instant
 
 class DigitRecognitionNetwork(
     private val mlp: MLP = MLP.generate(
@@ -13,17 +16,16 @@ class DigitRecognitionNetwork(
 ) {
 
     companion object {
-        fun fromFile(fileName: String): DigitRecognitionNetwork {
-            error("TODO")
-        }
+        fun fromFile(fileName: String): DigitRecognitionNetwork =
+            DigitRecognitionNetwork(loadMlpFromFile(fileName))
     }
 
     fun train(epochs: Int, batchSize: Int) {
         error("TODO")
     }
 
-    fun saveToFile(fileName: String): String {
-        error("TODO")
+    fun saveToFile() {
+        mlp.saveToFile("digit-recognition-mlp-${Instant.now()}.json")
     }
 
     fun evaluate(): String {

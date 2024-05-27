@@ -2,7 +2,9 @@ package ge.nika.digitrecognition.io.file
 
 import ge.nika.digitrecognition.io.file.NeuronFileDto.Companion.toFileDto
 import ge.nika.network.Layer
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class LayerFileDto(
     val numberOfInputsInNeuron: Int,
     val numberOfNeurons: Int,

@@ -2,7 +2,9 @@ package ge.nika.digitrecognition.io.file
 
 import ge.nika.Value.Companion.asValue
 import ge.nika.network.Neuron
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class NeuronFileDto(
     val activationFunctionType: ActivationFunctionType,
     val numberOfInputs: Int,
