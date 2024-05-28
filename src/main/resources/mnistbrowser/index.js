@@ -7,7 +7,10 @@ document.getElementById("printRandomBtn").addEventListener("click", (clickEvent)
         .then(response =>  response.json() )
         .then(json => {
             document.getElementById("serverOutput").innerHTML = json.html
-            currentDigit = json
+            currentDigit = {
+                label: json.label,
+                pixels: json.pixels,
+            }
         })
 
     let guessBtn = document.getElementById("guessDigitBtn")
@@ -27,6 +30,6 @@ document.getElementById("guessDigitBtn").addEventListener("click", (clickEvent) 
     fetch(serverUrl + "/digits/guess", options)
         .then(response =>  response.json() )
         .then(json => {
-            document.getElementById("guessResultDiv").innerHTML = json
+            document.getElementById("guessResultDiv").innerHTML = JSON.stringify(json)
         })
 })

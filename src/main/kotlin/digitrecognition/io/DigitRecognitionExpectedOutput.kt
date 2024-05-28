@@ -39,6 +39,6 @@ data class DigitRecognitionExpectedOutput(
 
     fun calculateLoss(output: List<Value>): Value =
         expectedNeuronValues.zip(output).map { (expectedValue, receivedValue) ->
-            (receivedValue - expectedValue).squared()
-        }.sum()
+            (expectedValue - receivedValue).squared()
+        }.sum() * (1.0/20).asValue()
 }

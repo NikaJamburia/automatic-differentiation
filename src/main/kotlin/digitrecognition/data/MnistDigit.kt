@@ -5,6 +5,7 @@ import digitrecognition.io.DigitRecognitionExpectedOutput
 import digitrecognition.io.DigitRecognitionTrainingParams
 import kotlinx.html.*
 import kotlinx.html.stream.appendHTML
+import org.jetbrains.kotlinx.dl.dataset.DataBatch
 import java.io.StringWriter
 import kotlin.random.Random
 
@@ -20,6 +21,15 @@ data class MnistDigit(
                 pixels = dataSet.x[randomIndex],
                 label = dataSet.y[randomIndex]
             )
+        }
+
+        fun DataBatch.toListOfDigits(): List<MnistDigit> {
+            return (0..<size).map {
+                MnistDigit(
+                    pixels = x[it],
+                    label = y[it]
+                )
+            }
         }
     }
 
